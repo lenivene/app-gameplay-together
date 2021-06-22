@@ -1,5 +1,6 @@
 import React from 'react';
-import {TouchableOpacityProps} from 'react-native';
+import { RectButtonProps } from 'react-native-gesture-handler';
+
 // Components
 import {
   Container,
@@ -11,7 +12,7 @@ import {
 // Assets
 import discordSrc from '../../assets/discord.png';
 
-export const ButtonIcon: React.FC<TouchableOpacityProps> = ({ children, ...rest }:any) => {
+export const ButtonIcon: React.FC<RectButtonProps> = ({ children, ...rest }:any) => {
   return (
     <Container {...rest}>
       <IconWrapper>

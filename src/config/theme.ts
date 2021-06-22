@@ -4,11 +4,14 @@ declare module "styled-components" {
   export interface DefaultTheme {
     primary: string;
     secondary: string;
+    success: string;
 
     backgroundGradient: Array<string>;
+    borderGradient: Array<string>;
 
-    texts: {
+    textColors: {
       heading: string;
+      highlight: string;
     }
 
     fonts: {
@@ -23,11 +26,14 @@ declare module "styled-components" {
 export const themeConfig: DefaultTheme = {
   primary: '#E51C44',
   secondary: '#0D133D',
+  success: '#32BD50',
 
   backgroundGradient: ['#0E1647', '#0A1033'],
+  borderGradient: ['#243189', '#1B2565'],
 
-  texts: {
-    heading: '#DDE3F0'
+  textColors: {
+    heading: '#DDE3F0',
+    highlight: '#ABB1CC',
   },
 
   fonts: {

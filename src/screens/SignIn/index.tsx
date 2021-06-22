@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 
 import {
   Container,
@@ -13,6 +14,12 @@ import { ButtonIcon } from '../../components/ButtonIcon';
 import bannerSrc from '../../assets/illustration.png';
 
 export const SignInScreen: React.FC = () => {
+  const navigation = useNavigation();
+
+  function handleSignIn() {
+    navigation.navigate('Home');
+  }
+
   return (
     <>
       <Container>
@@ -30,7 +37,7 @@ export const SignInScreen: React.FC = () => {
             Crie grupos para jogar seus games {`\n`}
             favoritos com seus amigos
           </Description>
-          <ButtonIcon>
+          <ButtonIcon onPress={handleSignIn}>
             Entrar com discord
           </ButtonIcon>
         </ContentContainer>

@@ -17,7 +17,7 @@ export const ContentContainer = styled.View`
 `;
 
 export const Title = styled.Text`
-  color: ${({ theme }) => theme.texts.heading};
+  color: ${({ theme }) => theme.textColors.heading};
   font-family: ${({ theme}) => theme.fonts.title700};
   text-align: center;
   line-height: 40px;
@@ -26,7 +26,7 @@ export const Title = styled.Text`
 `;
 
 export const Description = styled.Text`
-  color: ${({ theme }) => theme.texts.heading};
+  color: ${({ theme }) => theme.textColors.heading};
   font-family: ${({ theme}) => theme.fonts.title500};
   font-size: 15px;
   text-align: center;

@@ -14,10 +14,10 @@ export const ContentContainer = styled.View`
 `;
 
 export const GuildIcon = styled.Image`
-  width: 64;
-  height: 64;
-  border-radius: 8;
-  margin-right: 20;
+  width: 64px;
+  height: 64px;
+  border-radius: 8px;
+  margin-right: 20px;
 `;
 
 export const HeaderContainer = styled.View`

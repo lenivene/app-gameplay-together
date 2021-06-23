@@ -21,15 +21,22 @@ export const Category: React.FC<Props> = ({
   borderColors,
   backgroundColors,
   icon: Icon,
+  hasCheckbox = false,
   checked = false,
   children,
   ...rest
 }) => {
   return (
-    <Main checked={checked} {...rest}>
+    <Main
+      hasCheckbox={hasCheckbox}
+      checked={checked}
+      {...rest}
+    >
       <Container colors={borderColors}>
         <Wrapper colors={backgroundColors}>
-          {checked ? <Checked /> : <Check />}
+          {hasCheckbox && (
+            checked ? <Checked /> : <Check />
+          )}
           <Icon 
             width={48} 
             height={48}

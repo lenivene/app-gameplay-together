@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTheme } from 'styled-components';
+import { useTheme } from 'styled-components/native';
 
 // Types
 import { RectButtonProps } from 'react-native-gesture-handler';
@@ -31,7 +31,7 @@ type Props = RectButtonProps & {
   data: IAppointments;
 }
 
-const Appointment: React.FC<Props> = ({ data, ...rest }) => {
+export const Appointment: React.FC<Props> = ({ data, ...rest }) => {
   const colors = useTheme();
 
   const [category] = categoriesData.filter(item => item.id === data.category);
@@ -79,5 +79,3 @@ const Appointment: React.FC<Props> = ({ data, ...rest }) => {
     </Wrapper>
   );
 }
-
-export default Appointment;

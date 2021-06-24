@@ -18,13 +18,13 @@ export const Content = styled.View`
 export const Title = styled.Text`
   font-family: ${({ theme }) => theme.fonts.title700};
   color: ${({ theme }) => theme.textColors.heading};
-  margin-bottom: 11px;
+  margin-bottom: 4px;
   font-size: 18px;
 `;
 
 export const Role = styled.Text`
   font-family: ${({ theme }) => theme.fonts.text400};
   color: ${({ theme }) => theme.textColors.highlight};
-  margin-bottom: 24px;
+  margin-bottom: 12px;
   font-size: 13px;
 `;

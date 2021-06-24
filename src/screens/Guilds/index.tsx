@@ -20,9 +20,14 @@ export const Guilds: React.FC<Props> = ({handleGuildSelect}) => {
     <Container>
       <GuildsList
         data={guildsData}
-        keyExtractor={item => String(item.id)}
         showsVerticalScrollIndicator={false}
-        ItemSeparatorComponent={() => <ListDivider />}
+        keyExtractor={item => String(item.id)}
+        ItemSeparatorComponent={() => <ListDivider isCentralized />}
+        ListHeaderComponent={() => <ListDivider isCentralized />}
+        contentContainerStyle={{
+          paddingTop: 103,
+          paddingBottom: 68
+        }}
         renderItem={({ item }) => (
           <Guild
             data={item} 

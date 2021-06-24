@@ -12,7 +12,6 @@ export const Overlay = styled.View`
 
 export const Bar = styled.View`
   background-color: ${({ theme }) => theme.hr};
-  margin-bottom: 103px;
   align-self: center;
   border-radius: 2px;
   margin-top: 13px;

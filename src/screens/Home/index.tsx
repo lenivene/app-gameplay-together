@@ -47,19 +47,20 @@ export const HomeScreen: React.FC = () => {
           title="Partidas agendadas"
           total={6}
         />
-        <AppointmentsList
-          showsVerticalScrollIndicator={false}
-          data={appointmentsData}
-          ItemSeparatorComponent={() => <ListDivider />}
-          keyExtractor={item => String(item.id)}
-          renderItem={({ item }) => (
-            <Appointment
-              data={item}
-              onPress={goToAppointmentDetailsScreen}
-            />            
-          )}
-        />
       </ContentContainer>
+      <AppointmentsList
+        data={appointmentsData}
+        showsVerticalScrollIndicator={false}
+        keyExtractor={item => String(item.id)}
+        ItemSeparatorComponent={() => <ListDivider />}
+        contentContainerStyle={{ paddingBottom: 69 }}
+        renderItem={({ item }) => (
+          <Appointment
+            data={item}
+            onPress={goToAppointmentDetailsScreen}
+          />            
+        )}
+      />
     </Container>
   );
 }

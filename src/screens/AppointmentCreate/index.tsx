@@ -42,6 +42,10 @@ export const AppointmentCreateScreen: React.FC = () => {
     setOpenGuildsModal(true);
   }
 
+  function handleCloseGuilds(){
+    setOpenGuildsModal(false);
+  }
+
   function handleGuildSelect(guildSelect: IGuild){
     setGuild(guildSelect);
     setOpenGuildsModal(false);
@@ -57,7 +61,7 @@ export const AppointmentCreateScreen: React.FC = () => {
           style={{
             marginTop: 36,
             marginBottom: 18,
-            marginLeft: 24
+            marginLeft: 24,
           }}
         >
           Categoria
@@ -141,7 +145,10 @@ export const AppointmentCreateScreen: React.FC = () => {
         </FormContainer>
       </WrapperMain>
 
-      <ModalView visible={openGuildsModa}>
+      <ModalView
+        onPressClose={handleCloseGuilds}
+        visible={openGuildsModa}
+      >
         <Guilds handleGuildSelect={handleGuildSelect}/>
       </ModalView>
     </Container>

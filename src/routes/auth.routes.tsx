@@ -6,7 +6,6 @@ const { Navigator, Screen } = createStackNavigator();
 
 // Screens
 import { HomeScreen } from '../screens/Home';
-import { SignInScreen } from '../screens/SignIn';
 import { AppointmentDetailsScreen } from '../screens/AppointmentDetails';
 import { AppointmentCreateScreen } from '../screens/AppointmentCreate';
 
@@ -22,7 +21,6 @@ export const AuthRoutes: React.FC = () => {
         }
       }}
     >
-      <Screen name="SignIn" component={SignInScreen} />
       <Screen name="Home" component={HomeScreen} />
       <Screen name="AppointmentDetails" component={AppointmentDetailsScreen} />
       <Screen name="AppointmentCreate" component={AppointmentCreateScreen} />

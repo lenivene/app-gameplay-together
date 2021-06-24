@@ -1,5 +1,9 @@
 import React from 'react';
-import { useNavigation } from '@react-navigation/native';
+import { ActivityIndicator, Alert } from 'react-native';
+import { useTheme } from 'styled-components/native';
+
+// Hooks
+import { useAuth } from '../../hooks/Auth';
 
 import {
   Container,
@@ -14,10 +18,16 @@ import { ButtonIcon } from '../../components/ButtonIcon';
 import bannerSrc from '../../assets/illustration.png';
 
 export const SignInScreen: React.FC = () => {
-  const navigation = useNavigation();
-
-  function handleSignIn() {
-    navigation.navigate('Home');
+  const { loading, signIn } = useAuth();
+  const themeConfig = useTheme();
+  
+  const handleSignIn = async () => {
+    try {
+      await signIn();
+    }
+    catch (error: any) {
+      Alert.alert(error);
+    }
   }
 
   return (
@@ -37,9 +47,13 @@ export const SignInScreen: React.FC = () => {
             Crie grupos para jogar seus games {`\n`}
             favoritos com seus amigos
           </Description>
-          <ButtonIcon onPress={handleSignIn}>
-            Entrar com discord
-          </ButtonIcon>
+          {loading ? (
+            <ActivityIndicator color={themeConfig.primary} />
+          ) : (
+            <ButtonIcon onPress={handleSignIn}>
+              Entrar com discord
+            </ButtonIcon>
+          )}
         </ContentContainer>
       </Container>
     </>

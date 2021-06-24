@@ -15,6 +15,7 @@
     },
     "name": "gameplay-together",
     "orientation": "portrait",
+    "scheme": "gameplay-together",
     "slug": "gameplay-together",
     "splash": {
       "backgroundColor": "#0E1647",

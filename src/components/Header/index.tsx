@@ -35,11 +35,9 @@ export const Header: React.FC<Props> = ({ title, action }) => {
 
       <Title>{title}</Title>
 
-      { action && (
-        <View>
-          {action}
-        </View>
-      )}
+      <View style={{width: 24}}>
+        { action ? action : null}
+      </View>
     </Container>
   );
 }

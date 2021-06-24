@@ -24,13 +24,13 @@ export const HomeScreen: React.FC = () => {
     categoryId === categorySelected ? setCategory(null as any) : setCategory(categoryId);
   }, []);
 
-  const goToAppointmentDetailsScreen = () => {
+  const goToAppointmentDetailsScreen = useCallback(() => {
     navigation.navigate('AppointmentDetails');
-  }
+  }, []);
 
-  const goToAppointmentCreateScreen = () => {
+  const goToAppointmentCreateScreen = useCallback(() => {
     navigation.navigate('AppointmentCreate');
-  }
+  }, []);
 
   return (
     <Container>

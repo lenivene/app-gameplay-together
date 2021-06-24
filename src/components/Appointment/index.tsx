@@ -12,6 +12,7 @@ import { categoriesData } from '../../mock/data/categories';
 import {
   Wrapper,
   Container,
+  GuildContainer,
   GuildIcon,
   HeaderContainer,
   ContentContainer,
@@ -41,12 +42,16 @@ export const Appointment: React.FC<Props> = ({ data, ...rest }) => {
   return (
     <Wrapper {...rest}>
       <Container>
-        <GuildIcon
-          source={{
-            uri: 'https://i.ibb.co/9pmBQkv/otfL5n8.png'
-          }}
-          resizeMode="cover"
-        />
+        <GuildContainer
+          colors={colors.borderGradient}
+        >
+          <GuildIcon
+            source={{
+              uri: 'https://i.ibb.co/9pmBQkv/otfL5n8.png'
+            }}
+            resizeMode="cover"
+          />
+        </GuildContainer>
         <ContentContainer>
           <HeaderContainer>
             <Title>

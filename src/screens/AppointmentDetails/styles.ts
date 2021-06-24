@@ -25,14 +25,15 @@ export const PictureContent = styled.View`
 
 export const Title = styled.Text`
   font-family: ${({ theme }) => theme.fonts.title700};
-  font-size: 28px;
   color: ${({ theme }) => theme.textColors.heading};
+  font-size: 28px;
 `;
 
 export const Subtitle = styled.Text`
   font-family: ${({ theme }) => theme.fonts.text400};
-  font-size: 13px;
   color: ${({ theme }) => theme.textColors.heading};
+  line-height: 21px;
+  font-size: 13px;
 `;
 
 export const MemberList = styled(FlatList as new () => FlatList<IMember>)`

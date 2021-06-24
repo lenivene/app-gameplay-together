@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 import { RectButton } from 'react-native-gesture-handler';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export const Wrapper = styled(RectButton)``;
 
@@ -13,11 +14,20 @@ export const ContentContainer = styled.View`
   flex: 1;
 `;
 
-export const GuildIcon = styled.Image`
-  width: 64px;
-  height: 64px;
-  border-radius: 8px;
+export const GuildContainer = styled(LinearGradient)`
+  justify-content: center;
+  align-items: center;
   margin-right: 20px;
+  border-radius: 8px;
+  padding: 1px;
+  height: 69px;
+  width: 65px;
+`;
+
+export const GuildIcon = styled.Image`
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
 `;
 
 export const HeaderContainer = styled.View`

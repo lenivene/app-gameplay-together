@@ -1,4 +1,7 @@
-import React, { useState } from 'react';
+import React, {
+  useCallback,
+  useState
+} from 'react';
 import { Platform } from 'react-native';
 import { useTheme } from 'styled-components/native';
 
@@ -51,6 +54,10 @@ export const AppointmentCreateScreen: React.FC = () => {
     setOpenGuildsModal(false);
   }
 
+  const handleCategorySelect = useCallback((categoryId: string) => {
+    setCategory(categoryId);
+  }, []);
+
   return (
     <Container behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
       <WrapperMain>
@@ -69,7 +76,7 @@ export const AppointmentCreateScreen: React.FC = () => {
         <CategoriesList
           hasCheckbox
           selected={category}
-          onChange={setCategory}
+          onChange={handleCategorySelect}
         />
 
         <FormContainer>
@@ -96,7 +103,7 @@ export const AppointmentCreateScreen: React.FC = () => {
           </SelectButtonContainer>
           <Field>
           <WrapperView>
-              <Label>
+              <Label style={{ marginBottom: 12 }}>
                 Dia e mês
               </Label>
               <ColumnField>
@@ -108,7 +115,7 @@ export const AppointmentCreateScreen: React.FC = () => {
               </ColumnField>
             </WrapperView>
             <WrapperView>
-              <Label>
+              <Label style={{ marginBottom: 12 }}>
                 Hora e minuto
               </Label>
               <ColumnField>
@@ -136,6 +143,7 @@ export const AppointmentCreateScreen: React.FC = () => {
               maxLength={100}
               numberOfLines={5}
               autoCorrect={false}
+              style={{textAlignVertical: 'top'}}
             />
           </WrapperView>
 

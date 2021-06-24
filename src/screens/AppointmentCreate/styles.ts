@@ -33,7 +33,10 @@ export const SelectButtonWrapper = styled.View`
 `;
 
 export const SelectImage = styled.View`
-  background-color: ${({ theme }) => theme.borderGradient[0]};
+  background-color: ${({ theme }) => theme.headerBackgroundGradient[1]};
+  border-color: ${({ theme}) => theme.borderGradient[0]};
+  border-width: 1px;
+  border-left-width: 0;
   border-radius: 8px;
   height: 68px;
   width: 64px;
@@ -58,10 +61,12 @@ export const ColumnField = styled.View`
 
 export const SmallInput = styled.TextInput.attrs({ keyboardType: 'numeric' })`
   background-color: ${({ theme }) => theme.headerBackgroundGradient[1]};
+  border-color: ${({ theme }) => theme.borderGradient[0]};
   font-family: ${({ theme }) => theme.fonts.text400};
   color: ${({ theme }) => theme.textColors.heading};
   text-align: center;
   border-radius: 8px;
+  border-width: 1px;
   margin-right: 4px;
   font-size: 13px;
   height: 48px;
@@ -83,10 +88,15 @@ export const LengthText = styled.Text`
 
 export const Textarea = styled.TextInput`
   background-color: ${({ theme }) => theme.headerBackgroundGradient[1]};
+  border-color: ${({ theme }) => theme.borderGradient[0]};
   font-family: ${({ theme }) => theme.fonts.text400};
   color: ${({ theme }) => theme.textColors.heading};
-  text-align: center;
+  padding-right: 16px;
+  padding-left: 16px;
+  padding-top: 16px;
+  padding-bottom: 16px;
   border-radius: 8px;
+  border-width: 1px;
   margin-right: 4px;
   font-size: 13px;
   height: 95px;

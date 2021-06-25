@@ -2,7 +2,7 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 
 import { useAuth } from "../hooks/Auth";
-import { AuthRoutes } from "./auth.routes";
+import { AuthRoutes } from "./app.routes";
 
 // Screen
 import { SignInScreen } from '../screens/SignIn';

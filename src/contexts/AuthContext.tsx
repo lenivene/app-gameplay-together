@@ -5,8 +5,10 @@ import React, {
   useState
 } from "react";
 import * as AuthSession from 'expo-auth-session';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { configDiscord } from "../config/auth/discordAuth";
+import { localStorageConfig } from "../config/localStorage";
 import { apiDiscord, getAuthUrlDiscord } from "../services/apiDiscord";
 
 type User = {
@@ -22,6 +24,7 @@ type AuthContextData = {
   user: User;
   loading: boolean;
   signIn: () => Promise<void>;
+  signOut: () => Promise<void>;
 }
 
 type AuthorizationResponse = AuthSession.AuthSessionResult & {
@@ -62,14 +65,32 @@ export const AuthProvider: React.FC = ({ children }) => {
           token: params.access_token
         }
 
+        await AsyncStorage.setItem(localStorageConfig.collection_users, JSON.stringify(userData));
         setUser(userData);
       }
     } catch {
       throw new Error('Não foi possível autenticar');
-    }
-    finally{
+    } finally {
       setLoading(false);
     }
+  }, []);
+
+  const signOut = async () =>{
+    setUser({} as User);
+    await AsyncStorage.removeItem(localStorageConfig.collection_users);
+  }
+
+  useEffect(() => {
+    (async () => {
+      const storage = await AsyncStorage.getItem(localStorageConfig.collection_users);
+  
+      if (storage) {
+        const userLogged = JSON.parse(storage) as User;
+        apiDiscord.defaults.headers.authorization = `Bearer ${userLogged.token}`;
+  
+        setUser(userLogged);
+      }
+    })();
   }, []);
 
   return (
@@ -77,6 +98,7 @@ export const AuthProvider: React.FC = ({ children }) => {
       user,
       loading,
       signIn,
+      signOut,
     }}>
       {children}
     </AuthContext.Provider>

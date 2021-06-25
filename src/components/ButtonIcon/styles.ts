@@ -11,12 +11,13 @@ export const Container = styled(RectButton)`
 `;
 
 export const IconWrapper = styled.View`
-  width: 56px;
-  border-right-width: 1px;
   border-right-color : rgba(0,0,0,.1);
+  border-right-width: 1px;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
   height: 56px;
+  width: 56px;
 `;
 
 export const IconImage = styled.Image`

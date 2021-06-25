@@ -2,8 +2,14 @@ import React, {
   useCallback,
   useState
 } from 'react';
+import uuid from 'react-native-uuid';
 import { Platform } from 'react-native';
 import { useTheme } from 'styled-components/native';
+import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+// Config
+import { localStorageConfig } from '../../config/localStorage';
 
 // Icons
 import { Feather } from '@expo/vector-icons';
@@ -37,9 +43,18 @@ import { GuildIcon } from '../../components/GuildIcon';
 
 export const AppointmentCreateScreen: React.FC = () => {
   const themeConfig = useTheme();
+  const navigation = useNavigation();
+
+  // States
   const [category, setCategory] = useState('');
   const [openGuildsModa, setOpenGuildsModal] = useState(false);
   const [guild, setGuild] = useState<IGuild>({} as IGuild);
+
+  const [day, setDay] = useState('');
+  const [month, setMonth] = useState('');
+  const [hour, setHour] = useState('');
+  const [minute, setMinute] = useState('');
+  const [description, setDescription] = useState('');
 
   function handleOpenGuilds(){
     setOpenGuildsModal(true);
@@ -56,6 +71,26 @@ export const AppointmentCreateScreen: React.FC = () => {
 
   const handleCategorySelect = useCallback((categoryId: string) => {
     setCategory(categoryId);
+  }, []);
+
+  const handleSave = useCallback(async () => {
+    const newAppointment = {
+      id: uuid.v4(),
+      guild,
+      category,
+      date: `${day}/${month} às ${hour}:${minute}h`,
+      description
+    };
+
+    const storage = await AsyncStorage.getItem(localStorageConfig.collection_appointments);
+    const appointments = storage ? JSON.parse(storage) : [];
+
+    await AsyncStorage.setItem(
+      localStorageConfig.collection_appointments,
+      JSON.stringify([...appointments, newAppointment])
+    );
+
+    navigation.navigate('Home');    
   }, []);
 
   return (
@@ -82,12 +117,11 @@ export const AppointmentCreateScreen: React.FC = () => {
         <FormContainer>
           <SelectButtonContainer onPress={handleOpenGuilds}>
             <SelectButtonWrapper>
-            {
-              guild.icon 
-              ? <GuildIcon /> 
-              : <SelectImage />
-            }
-
+              {
+                guild.icon 
+                ? <GuildIcon guildId={String(guild.id)} iconId={guild.icon} /> 
+                : <SelectImage />
+              }
               <SelectBody>
                 <Label>
                   {guild.name ? guild.name : 'Selecione um servidor'}
@@ -107,11 +141,17 @@ export const AppointmentCreateScreen: React.FC = () => {
                 Dia e mês
               </Label>
               <ColumnField>
-                <SmallInput maxLength={2} />
+                <SmallInput
+                  maxLength={2}
+                  onChangeText={setDay}
+                />
                 <SeparatorText>
                   /
                 </SeparatorText>
-                <SmallInput maxLength={2} />
+                <SmallInput
+                  maxLength={2}
+                  onChangeText={setMonth}
+                />
               </ColumnField>
             </WrapperView>
             <WrapperView>
@@ -119,11 +159,17 @@ export const AppointmentCreateScreen: React.FC = () => {
                 Hora e minuto
               </Label>
               <ColumnField>
-                <SmallInput maxLength={2} />
+                <SmallInput
+                  maxLength={2}
+                  onChangeText={setHour}
+                />
                 <SeparatorText>
                   :
                 </SeparatorText>
-                <SmallInput maxLength={2} />
+                <SmallInput
+                  maxLength={2}
+                  onChangeText={setMinute}
+                />
               </ColumnField>
             </WrapperView>
           </Field>
@@ -143,12 +189,17 @@ export const AppointmentCreateScreen: React.FC = () => {
               maxLength={100}
               numberOfLines={5}
               autoCorrect={false}
+              onChangeText={setDescription}
               style={{textAlignVertical: 'top'}}
             />
           </WrapperView>
 
           <Footer>
-            <Button>Agendar</Button>
+            <Button
+              onPress={handleSave}
+            >
+              Agendar
+            </Button>
           </Footer>
         </FormContainer>
       </WrapperMain>

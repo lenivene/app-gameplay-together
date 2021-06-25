@@ -17,17 +17,18 @@ import { WrapperView } from '../WrapperMain';
 
 // Types
 import { IGuild } from '../../@types/data';
-type Props = ContainerProps & {
+type Props = Omit<ContainerProps & {
   data: IGuild;
-}
+}, "style">
 export const Guild: React.FC<Props> = ({data, ...rest}: Props) => {
   const themeConfig = useTheme();
 
   return (
-    <Container
-    {...rest}
-    >
-      <GuildIcon />
+    <Container {...rest}>
+      <GuildIcon
+        guildId={String(data.id)}
+        iconId={data.icon}
+      />
       <Content>
         <WrapperView>
           <Title>

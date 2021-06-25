@@ -2,11 +2,11 @@ import React from 'react';
 import { View } from 'react-native';
 
 // Types
-type Props = { data: IMember };
 import { IMember } from '../../@types/data';
+type Props = { data: IMember };
 
 // Components
-import { Avatar } from '../Avatar/Index';
+import { Avatar } from '../Avatar';
 import {
   BulletStatus,
   Container,

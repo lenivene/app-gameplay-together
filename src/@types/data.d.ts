@@ -1,11 +1,14 @@
+
+export interface IGuild {
+  id: number;
+  name: string;
+  icon: string | null;
+  owner: boolean;
+};
+
 export interface IAppointments {
   id: number;
-  guild: {
-    id: number;
-    name: string;
-    icon: any;
-    owner: boolean;
-  };
+  guild: IGuild;
   category: number;
   date: string,
   description: string
@@ -17,13 +20,6 @@ export interface IMember {
   avatar_url: string;
   status: 'online' | 'offline';
 }
-
-export interface IGuild {
-  id: number;
-  name: string;
-  icon: string | null;
-  owner: boolean;
-};
 
 export type AppointmentsType = Array<IAppointments>;
 export type MembersType = Array<IMember>;

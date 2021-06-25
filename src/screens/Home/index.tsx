@@ -1,5 +1,15 @@
-import React, { useCallback, useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
+import React, {
+  useCallback,
+  useState
+} from 'react';
+import {
+  useFocusEffect,
+  useNavigation
+} from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+// Config
+import { localStorageConfig } from "../../config/localStorage";
 
 // Components
 import {
@@ -12,16 +22,23 @@ import { Profile } from '../../components/Profile';
 import { ButtonAdd } from '../../components/ButtonAdd';
 import { ListHeader } from '../../components/ListHeader';
 import { CategoriesList } from '../../components/Categories';
-import { appointmentsData } from '../../mock/data/appointments';
 import { ListDivider } from '../../components/ListDivider';
 import { Appointment } from '../../components/Appointment';
 
+// Types
+import { AppointmentsType } from '../../@types/data';
+import { Load } from '../../components/Load';
+
 export const HomeScreen: React.FC = () => {
   const navigation = useNavigation();
-  const [categorySelected, setCategory] = useState<string>(null as any);
 
-  const handleCategorySelect = useCallback((categoryId: string) => {
-    categoryId === categorySelected ? setCategory(null as any) : setCategory(categoryId);
+  // States
+  const [categorySelected, setCategory] = useState<number>(null as any);
+  const [loading, setLoading] = useState(true);
+  const [appointments, setAppointments] = useState<AppointmentsType>([]);
+
+  const handleCategorySelect = useCallback((categoryId: number) => {
+    categoryId === categorySelected ? setCategory(null as any) : setCategory(Number(categoryId));
   }, []);
 
   const goToAppointmentDetailsScreen = useCallback(() => {
@@ -32,6 +49,21 @@ export const HomeScreen: React.FC = () => {
     navigation.navigate('AppointmentCreate');
   }, []);
 
+  useFocusEffect(useCallback(() => {
+    (async () => {
+      const response = await AsyncStorage.getItem(localStorageConfig.collection_appointments);
+      const storage: AppointmentsType = response ? JSON.parse(response) : [];
+
+      if(categorySelected){
+        setAppointments(storage.filter(item => item.category === categorySelected));
+      }else{
+        setAppointments(storage)
+      }
+      
+      setLoading(false);
+    })();
+  }, []))
+
   return (
     <Container>
       <HeaderContainer>
@@ -39,28 +71,32 @@ export const HomeScreen: React.FC = () => {
         <ButtonAdd onPress={goToAppointmentCreateScreen} />
       </HeaderContainer>
       <CategoriesList
-        selected={categorySelected}
-        onChange={handleCategorySelect}
+        selected={String(categorySelected)}
+        onChange={categoryId => handleCategorySelect(Number(categoryId))}
       />
-      <ContentContainer>
-        <ListHeader
-          title="Partidas agendadas"
-          total={6}
-        />
-      </ContentContainer>
-      <AppointmentsList
-        data={appointmentsData}
-        showsVerticalScrollIndicator={false}
-        keyExtractor={item => String(item.id)}
-        ItemSeparatorComponent={() => <ListDivider />}
-        contentContainerStyle={{ paddingBottom: 69 }}
-        renderItem={({ item }) => (
-          <Appointment
-            data={item}
-            onPress={goToAppointmentDetailsScreen}
-          />            
-        )}
-      />
+      {loading ? <Load /> : (
+        <>
+          <ContentContainer>
+            <ListHeader
+              title="Partidas agendadas"
+              total={6}
+            />
+          </ContentContainer>
+          <AppointmentsList
+            data={appointments}
+            showsVerticalScrollIndicator={false}
+            keyExtractor={item => String(item.id)}
+            ItemSeparatorComponent={() => <ListDivider />}
+            contentContainerStyle={{ paddingBottom: 69 }}
+            renderItem={({ item }) => (
+              <Appointment
+                data={item}
+                onPress={goToAppointmentDetailsScreen}
+              />            
+            )}
+          />
+        </>
+      )}
     </Container>
   );
 }

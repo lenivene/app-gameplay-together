@@ -34,6 +34,7 @@ I developed using the following technologies
 - [Node.js](https://nodejs.org/en/)
 - [React Native](https://reactnative.dev/)
 - [Expo](https://expo.io/)
+- [Styled Components](https://styled-components.com/)
 - [VSCode](https://code.visualstudio.com/)
 
 # 📝 License
